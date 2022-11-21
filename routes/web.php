@@ -13,6 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Image;
+
 Route::get('/', function () {
+	$images = Image::all();
+	foreach ($images as $image) {
+		echo $image->image_path."<br>";
+		echo $image->description."<br>";
+		echo $image->user->name." ".$image->user->surname."<br>";
+
+		if (count($image->comments) >= 1) {
+			echo "<strong>Comentarios: </strong><br>";
+			foreach ($image->comments as $comment) {
+				echo "<strong>".$comment->user->name." ".$comment->user->surname.": </strong>";
+				echo $comment->content."<br/>";
+			}
+		}
+		echo "LIKES: ".count($image->likes);
+		echo "<hr>";
+	}
+	die();
+
     return view('welcome');
 });
