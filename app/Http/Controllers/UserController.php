@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\File;
 
 class UserController extends Controller{
 
+	//Restrict only to authenticated users
+	public function __construct(){
+        $this->middleware('auth');
+    }
+
 	//Show of config form view
 	public function config(){
 		return view('user.config');
