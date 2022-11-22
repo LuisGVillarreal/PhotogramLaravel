@@ -65,7 +65,7 @@
                                         {{ __('My profile') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('config') }}">
                                         {{ __('Config') }}
                                     </a>
 
