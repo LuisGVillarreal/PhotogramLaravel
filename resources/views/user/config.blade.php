@@ -83,6 +83,15 @@
 							</div>
 						</div>
 
+						<div class="form-group">
+							<div class="col-md-6 offset-md-4">
+								@if (Auth::user()->avatar)
+									{{-- <img src="{{ url('/user/avatar/'.Auth::user()->avatar) }}" height="50"> --}}
+									<img src="{{ route('user.avatar',['filename'=>Auth::user()->avatar]) }}" height="50">
+								@endif
+							</div>
+						</div>
+
 						<div class="form-group row mb-0">
 							<div class="col-md-6 offset-md-4">
 								<button type="submit" class="btn btn-primary">
