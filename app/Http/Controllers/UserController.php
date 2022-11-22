@@ -5,8 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class UserController extends Controller{
-    
+
+    //Show of config form view
     public function config(){
     	return view('user.config');
+    }
+
+    //Get data from the configuration form
+    public function update(Request $request){
+    	$id = \Auth::user()->id;
+    	$name = $request->input('name');
+    	$surname = $request->input('surname');
+    	$nick = $request->input('nick');
+    	$email = $request->input('email');
+    	var_dump($id);
+    	var_dump($name);
+    	var_dump($surname);
+    	die();
     }
 }

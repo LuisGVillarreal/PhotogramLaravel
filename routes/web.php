@@ -41,3 +41,5 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/config', 'UserController@config')->name('config');
+Route::post('user/update', 'UserController@update')->name('user.update');
+

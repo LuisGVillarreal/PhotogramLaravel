@@ -8,14 +8,14 @@
 				<div class="card-header">{{ __('Set up my account') }}</div>
 
 				<div class="card-body">
-					<form method="POST" action="{{ route('register') }}">
+					<form method="POST" action="{{ route('user.update') }}">
 						@csrf
 
 						<div class="form-group row">
 							<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
 							<div class="col-md-6">
-								<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+								<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }}" required autocomplete="name" autofocus>
 
 								@error('name')
 									<span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
 							<label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
 							<div class="col-md-6">
-								<input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
+								<input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ Auth::user()->surname }}" required autocomplete="surname" autofocus>
 
 								@error('surname')
 								<span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
 							<label for="nick" class="col-md-4 col-form-label text-md-right">{{ __('Nickname') }}</label>
 
 							<div class="col-md-6">
-								<input id="nick" type="text" class="form-control @error('nick') is-invalid @enderror" name="nick" value="{{ old('nick') }}" required autocomplete="nick" autofocus>
+								<input id="nick" type="text" class="form-control @error('nick') is-invalid @enderror" name="nick" value="{{ Auth::user()->nick }}" required autocomplete="nick" autofocus>
 
 								@error('nick')
 								<span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
 							<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
 							<div class="col-md-6">
-								<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+								<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}" required autocomplete="email">
 
 								@error('email')
 									<span class="invalid-feedback" role="alert">
