@@ -19,11 +19,12 @@
 						<img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="img-fluid">
 					</div>
 					<div class="card-footer">
-				      <strong>{{ '@'.$image->user->nick }}</strong>
-				      <p class="m-0">{{ $image->description }}</p>
-				    </div>
+					  <strong>{{ '@'.$image->user->nick }}</strong>
+					  <p class="m-0">{{ $image->description }}</p>
+					</div>
 				</div>
 		   @endforeach
+		   {{ $images->links() }}
 		</div>
 	</div>
 </div>
