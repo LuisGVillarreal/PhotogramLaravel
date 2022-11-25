@@ -31,7 +31,8 @@ class UserController extends Controller{
 			'name' => ['required', 'string', 'max:255'],
 			'surname' => ['required', 'string', 'max:255'],
 			'nick' => ['required', 'string', 'max:20', Rule::unique('users')->ignore($id)],
-			'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)]
+			'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
+			'avatar' => ['image']
 		]);
 
 		//Get user data
