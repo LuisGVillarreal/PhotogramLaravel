@@ -19,8 +19,10 @@
 						<img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="img-fluid">
 					</div>
 					<div class="card-footer">
-					  <strong>{{ '@'.$image->user->nick }}</strong>
-					  <p class="m-0">{{ $image->description }}</p>
+						<strong>{{ '@'.$image->user->nick }}</strong>
+						<p class="m-0 mb-1">{{ $image->description }}</p>
+						<button type="button" class="btn btn-outline-danger"><i class="bi bi-heart"></i>&nbsp;Like</button>
+						<button class="btn btn-primary ml-md-2" type="button"><i class="bi bi-chat"></i>&nbsp;Comments</button>
 					</div>
 				</div>
 		   @endforeach
