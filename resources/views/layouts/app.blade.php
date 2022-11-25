@@ -50,14 +50,16 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="">{{ __('Home') }}</a>
+                                <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">{{ __('Update photo') }}</a>
+                                <a class="nav-link" href="{{ route('image.create') }}">{{ __('Update photo') }}</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ route('user.avatar',['filename'=>Auth::user()->avatar]) }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    @if (Auth::user()->avatar)
+                                        <img src="{{ route('user.avatar',['filename'=>Auth::user()->avatar]) }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    @endif
                                     {{ Auth::user()->name }}
                                 </a>
 
