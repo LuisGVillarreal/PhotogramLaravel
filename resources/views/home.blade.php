@@ -21,6 +21,7 @@
 					</div>
 					<div class="card-footer">
 						<strong>{{ '@'.$image->user->nick }}</strong>
+						{{ ' | '.\FormatTime::LongTimeFilter($image->created_at) }}
 						<p class="m-0 mb-1">{{ $image->description }}</p>
 						<button type="button" class="btn btn-outline-danger"><i class="bi bi-heart"></i>&nbsp;Like</button>
 						<button class="btn btn-primary ml-md-2" type="button"><i class="bi bi-chat"></i>&nbsp;Comments&nbsp;({{ count($image->comments) }})</button>
