@@ -45,15 +45,17 @@
 				<div class="list-group">
 					@foreach ($image->comments as $comment)
 					<div class="list-group-item list-group-item-action">
-						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">{{ '@'.$comment->user->nick }}</h5>
-							<small class="text-muted">{{ \FormatTime::LongTimeFilter($comment->created_at) }}</small>
+						<div class="d-flex w-100 mb-1 align-items-center">
+							<h5 class="flex-grow-1">{{ '@'.$comment->user->nick }}</h5>
+							<small class="text-muted mr-2">{{ \FormatTime::LongTimeFilter($comment->created_at) }}</small>
+							@if (Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id == Auth::user()->id))
+								<a href="{{ route('comment.delete', ['id'=>$comment->id]) }}" class="btn btn-outline-danger py-0 px-1"><i class="bi-x-lg"></i></a>
+							@endif
 						</div>
 						<p class="mb-1">{{ $comment->content }}</p>
 					</div>
 					@endforeach
 				</div>
-		</div>
 	</div>
 </div>
 @endsection
