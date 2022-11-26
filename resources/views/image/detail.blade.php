@@ -27,7 +27,7 @@
 							@csrf
 							<input type="hidden" name="image_id" value="{{ $image->id }}">
 							<div class="col mb-2">
-								<label for="content" class="form-label">Comments</label>
+								<label for="content" class="form-label">Comment</label>
 								<textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="2" required></textarea>
 								@error('content')
 								<span class="invalid-feedback" role="alert">
