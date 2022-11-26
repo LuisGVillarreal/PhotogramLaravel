@@ -4,6 +4,7 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-10">
+			@include('include.message')
 				<div class="card mb-3">
 					<div class="card-header">
 						@if ($image->user->avatar)
@@ -21,11 +22,18 @@
 						<p class="m-0 mb-1">{{ $image->description }}</p>
 						<button type="button" class="btn btn-outline-danger"><i class="bi bi-heart"></i>&nbsp;Like</button>
 						<button class="btn btn-primary ml-md-2" type="button" disabled><i class="bi bi-chat"></i>&nbsp;Comments&nbsp;({{ count($image->comments) }})</button>
-						<form class="row mt-3">
+						<hr>
+						<form class="row mt-3" method="post" action="{{ route('comment.save') }}">
+							@csrf
 							<input type="hidden" name="image_id" value="{{ $image->id }}">
 							<div class="col mb-2">
 								<label for="content" class="form-label">Comments</label>
-								<textarea class="form-control" id="content" name="content" rows="2"></textarea>
+								<textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="2" required></textarea>
+								@error('content')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+								@enderror
 							</div>
 							<div class="col-12">
 								<button type="submit" class="btn btn-outline-primary">Submit</button>
