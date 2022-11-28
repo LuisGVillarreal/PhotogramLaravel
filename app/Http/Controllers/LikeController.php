@@ -11,6 +11,16 @@ class LikeController extends Controller{
 		$this->middleware('auth');
 	}
 
+	//My likes
+	public function index(){
+		$user = \Auth::user();
+		$likes = Like::where('user_id', $user->id)->orderBy('id', 'desc')
+							  ->paginate(5);
+		return view('like.mylikes', [
+            'likes' => $likes
+        ]);
+	}
+
 	//like
 	public function like($image_id){
 		$user =  \Auth::user();
@@ -52,4 +62,5 @@ class LikeController extends Controller{
 			]);
 		}
 	}
+
 }

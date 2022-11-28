@@ -74,6 +74,11 @@
                                         {{ __('Config') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('likes') }}">
+                                        {{ __('My Likes') }}
+                                    </a>
+
+
                                     <hr class="dropdown-divider">
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
