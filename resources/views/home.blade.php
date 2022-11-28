@@ -30,7 +30,7 @@
 								@php $user_like = true; @endphp
 							@endif
 						@endforeach
-						<button type="button" class="btn btn-outline-danger @if($user_like) active	@endif"><i class="bi bi-heart"></i>&nbsp;Like&nbsp;({{ count($image->likes) }})</button>
+						<button type="button" class="btn btn-like @if($user_like) btn-danger @else btn-outline-danger @endif"><i class="bi bi-heart"></i>&nbsp;Like&nbsp;({{ count($image->likes) }})</button>
 
 						<button class="btn btn-primary ml-md-2" type="button"><i class="bi bi-chat"></i>&nbsp;Comments&nbsp;({{ count($image->comments) }})</button>
 					</div>
