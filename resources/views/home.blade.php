@@ -23,7 +23,15 @@
 						<strong>{{ '@'.$image->user->nick }}</strong>
 						{{ ' | '.\FormatTime::LongTimeFilter($image->created_at) }}
 						<p class="m-0 mb-1">{{ $image->description }}</p>
-						<button type="button" class="btn btn-outline-danger"><i class="bi bi-heart"></i>&nbsp;Like</button>
+
+						@php $user_like = false; @endphp
+						@foreach ($image->likes as $like)
+							@if ($like->user->id == Auth::user()->id)
+								@php $user_like = true; @endphp
+							@endif
+						@endforeach
+						<button type="button" class="btn btn-outline-danger @if($user_like) active	@endif"><i class="bi bi-heart"></i>&nbsp;Like&nbsp;({{ count($image->likes) }})</button>
+
 						<button class="btn btn-primary ml-md-2" type="button"><i class="bi bi-chat"></i>&nbsp;Comments&nbsp;({{ count($image->comments) }})</button>
 					</div>
 				</div>
