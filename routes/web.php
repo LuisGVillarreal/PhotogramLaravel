@@ -42,6 +42,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/config', 'UserController@config')->name('config');
 Route::post('/user/update', 'UserController@update')->name('user.update');
+Route::get('/user/{id}', 'UserController@profile')->name('profile');
 Route::get('/user/avatar/{filename}', 'UserController@getAvatar')->name('user.avatar');
 Route::get('/upload', 'ImageController@create')->name('image.create');
 Route::post('/image/save', 'ImageController@save')->name('image.save');

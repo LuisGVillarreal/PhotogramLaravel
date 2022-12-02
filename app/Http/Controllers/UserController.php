@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\User;
 
 class UserController extends Controller{
 
@@ -69,5 +70,13 @@ class UserController extends Controller{
 		$file = Storage::disk('avatars')->get($filename);
 		return new Response($file, 200);
 	}
+
+	//Profile
+	public function profile($id){
+		$user =  User::find($id);
+
+		return view('user.profile', compact('user'));
+	}
+
 
 }
