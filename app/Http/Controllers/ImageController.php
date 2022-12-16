@@ -118,4 +118,26 @@ class ImageController extends Controller{
 		}
 	}
 
+	public function update(Request $request){
+		//Validate
+		$validate = $this->validate($request,[
+			'description' => ['required', 'string']
+		]);
+
+		//Get form data
+		$image_id = $request->input('image_id');
+		$description = $request->input('description');
+
+		//Set data
+		$image = Image::find($image_id);
+		$image->description = $description;
+
+		//Update
+		$image->update();
+
+		//Redirect
+		return redirect()->route('image.detail', ['id' => $image_id])
+						 ->with(['message' => 'Image successfully updated']);
+	}
+
 }

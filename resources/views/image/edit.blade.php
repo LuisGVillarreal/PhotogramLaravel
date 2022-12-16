@@ -9,12 +9,13 @@
 					Edit image
 				</div>
 				<div class="card-body">
-					<form method="post" action="" enctype="multipart/form-data">
+					<form method="post" action="{{ route('image.update') }}">
 						@csrf
+						<input type="hidden" name="image_id" value="{{ $image->id }}">
 						<div class="form-group row">
 							<label for="image_path" class="col-md-3 col-form-label text-md-right">Image</label>
 							<div class="col-md-7">
-								<img src="{{ route('image.file',['filename'=>$image->image_path]) }}" height="70">
+								<img src="{{ route('image.file',['filename'=>$image->image_path]) }}" height="100">
 							</div>
 						</div>
 
