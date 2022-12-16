@@ -16,7 +16,7 @@
 			    <i class="bi bi-three-dots"></i>
 			  </button>
 			  <div class="dropdown-menu dropdown-menu-right">
-			    <a class="dropdown-item" href="#">Edit</a>
+			    <a class="dropdown-item" href="{{ route('image.edit', ['id' => $image->id]) }}">Edit</a>
 			    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#deleteModalImg{{$image->id}}">Delete</button>
 			  </div>
 			</div>
