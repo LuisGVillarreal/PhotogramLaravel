@@ -1,13 +1,26 @@
 <div class="card mb-3">
-	<div class="card-header d-flex align-items-center">
-		@if ($image->user->avatar)
-			<img src="{{ route('user.avatar',['filename'=>$image->user->avatar]) }}" alt="mdo" width="32" height="32" class="rounded-circle align-middle">
+	<div class="card-header d-flex align-items-center justify-content-between">
+		<div>
+			@if ($image->user->avatar)
+				<img src="{{ route('user.avatar',['filename'=>$image->user->avatar]) }}" alt="mdo" width="32" height="32" class="rounded-circle align-middle">
+			@endif
+			<a href="{{ route('profile', ['id' => $image->user->id]) }}" class="link-dark">
+				<strong class="ml-2 text-dark">{{ $image->user->name.' '.$image->user->surname }}</strong>
+				<span class="text-muted ml-1">{{ '@'.$image->user->nick }}</span>
+			</a>&nbsp;
+				{{ ' · '.\FormatTime::LongTimeFilter($image->created_at) }}
+		</div>
+		@if (Auth::user() && Auth::user()->id == $image->user->id)
+			<div class="dropdown">
+			  <button class="btn btn-light" type="button" data-toggle="dropdown" aria-expanded="false">
+			    <i class="bi bi-three-dots"></i>
+			  </button>
+			  <div class="dropdown-menu dropdown-menu-right">
+			    <a class="dropdown-item" href="#">Edit</a>
+			    <a class="dropdown-item" href="#">Delete</a>
+			  </div>
+			</div>
 		@endif
-		<a href="{{ route('profile', ['id' => $image->user->id]) }}" class="link-dark">
-			<strong class="ml-2 text-dark">{{ $image->user->name.' '.$image->user->surname }}</strong>
-			<span class="text-muted ml-1">{{ '@'.$image->user->nick }}</span>
-		</a>&nbsp;
-			{{ ' · '.\FormatTime::LongTimeFilter($image->created_at) }}
 	</div>
 
 	<div class="card-body p-0">
