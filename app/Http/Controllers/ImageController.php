@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Image;
+use App\Comment;
+use App\Like;
 
 class ImageController extends Controller{
 
@@ -65,5 +67,40 @@ class ImageController extends Controller{
 		return view('image.detail',[
 			'image' => $image
 		]);
+	}
+
+	//Delete image
+	public function delete($id){
+		//Get data related to the image
+		$user  = \Auth::user();
+		$image = Image::find($id);
+		$comments = Comment::where('image_id', $id)->get();
+		$likes = Like::where('image_id', $id)->get();
+
+		if ($user && $image && $image->user->id == $user->id) {
+			//Delete comments
+			if ($comments && count($comments)>=1) {
+				foreach ($comments as $comment) {
+					$comment->delete();
+				}
+			}
+
+			//Delete Likes
+			if ($likes && count($likes)>=1) {
+				foreach ($likes as $like) {
+					$like->delete();
+				}
+			}
+
+			//Delete image
+			Storage::disk('images')->delete($image->image_path);
+			$image->delete();
+			$message = array('message' => 'The image has been deleted correctly' );
+		}else{
+			$message = array('message' => 'The image has not been deleted correctly' );
+		}
+
+		return redirect()->route('home')
+						->with($message);
 	}
 }

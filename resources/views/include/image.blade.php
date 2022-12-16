@@ -17,7 +17,7 @@
 			  </button>
 			  <div class="dropdown-menu dropdown-menu-right">
 			    <a class="dropdown-item" href="#">Edit</a>
-			    <a class="dropdown-item" href="#">Delete</a>
+			    <a class="dropdown-item" href="{{ route('image.delete', ['id' => $image->id]) }}">Delete</a>
 			  </div>
 			</div>
 		@endif
