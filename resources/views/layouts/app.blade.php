@@ -78,6 +78,10 @@
                                         {{ __('My Likes') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('user.index') }}">
+                                        {{ __('List Users') }}
+                                    </a>
+
 
                                     <hr class="dropdown-divider">
 

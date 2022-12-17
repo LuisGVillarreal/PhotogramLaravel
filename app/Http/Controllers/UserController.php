@@ -16,6 +16,12 @@ class UserController extends Controller{
         $this->middleware('auth');
     }
 
+    //List all users
+	public function index(){
+		$users = User::orderBy('id', 'desc')->paginate(5);
+		return view('user.index', compact('users'));
+	}
+
 	//Show of config form view
 	public function config(){
 		return view('user.config');
