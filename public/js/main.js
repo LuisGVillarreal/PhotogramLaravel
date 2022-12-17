@@ -43,4 +43,9 @@ window.addEventListener('load', function(){
 		});
 	}
 	dislike();
+
+	//Search
+	$('#formSearch').submit(function() {
+		$(this).attr('action', url+'/users/'+$('#formSearch #search').val());
+	});
 });

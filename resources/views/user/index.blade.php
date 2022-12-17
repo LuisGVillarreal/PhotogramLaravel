@@ -4,7 +4,14 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-8">
-			<h1>All Users</h1>
+			<div class="d-flex justify-content-between">
+				<h1>All Users</h1>
+				<form method="GET" action="{{ route('user.index') }}" class="form-inline" id="formSearch">
+					<input type="text" class="form-control mb-2 mr-sm-2" id="search" placeholder="Search user">
+
+					<input type="submit" class="btn btn-primary mb-2" value="Submit">
+				</form>
+			</div>
 			<hr>
 		   @foreach ($users as $user)
 				<div class="d-flex">
