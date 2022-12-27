@@ -70,10 +70,10 @@
 				</div>
 				<hr>
 				<div class="list-group">
-					@foreach ($image->comments as $comment)
+				@foreach ($image->comments as $comment)
 					<div class="list-group-item list-group-item-action">
 						<div class="d-flex w-100 mb-1 align-items-center">
-							<h5 class="flex-grow-1">{{ '@'.$comment->user->nick }}</h5>
+							<h6 class="flex-grow-1 font-weight-bold "><a href="{{ route('profile', ['id' => $comment->user->id]) }}" class="text-decoration-none text-dark">{{ '@'.$comment->user->nick }}</a></h6>
 							<small class="text-muted mr-2">{{ \FormatTime::LongTimeFilter($comment->created_at) }}</small>
 							@if (Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id == Auth::user()->id))
 								<a href="{{ route('comment.delete', ['id'=>$comment->id]) }}" class="btn btn-outline-danger py-0 px-1"><i class="bi-x-lg"></i></a>
@@ -81,7 +81,7 @@
 						</div>
 						<p class="mb-1">{{ $comment->content }}</p>
 					</div>
-					@endforeach
+				@endforeach
 				</div>
 	</div>
 </div>
