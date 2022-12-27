@@ -48,7 +48,7 @@
 			<img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="img-fluid"></a>
 		</div>
 		<div class="card-footer">
-			<p class="m-0 mb-1">{{ $image->description }}</p>
+			<p class="m-0 mb-1">{!! html_entity_decode(\HashtagLinks::getLinks($image->description) ) !!}</p>
 
 			@php $user_like = false; @endphp
 			@foreach ($image->likes as $like)

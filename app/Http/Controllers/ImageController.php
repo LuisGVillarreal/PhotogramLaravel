@@ -64,9 +64,7 @@ class ImageController extends Controller{
 	//Image detail
 	public function detail($id){
 		$image = Image::find($id);
-		return view('image.detail',[
-			'image' => $image
-		]);
+		return view('image.detail', compact('image'));
 	}
 
 	//Delete image
@@ -140,4 +138,24 @@ class ImageController extends Controller{
 						 ->with(['message' => 'Image successfully updated']);
 	}
 
+	//Search content
+	public function search($search = null){
+		if (!empty($search)) {
+			$images = Image::where('description', 'LIKE', '%'.$search.'%')
+								->orderBy('id', 'desc')
+								->paginate(5);
+		}else{
+			$images = Image::orderBy('id', 'desc')->paginate(5);
+		}
+
+		return view('image.explore', compact('images'));
+	}
+
+	//Search content
+	public function tag($tag){
+		$images = Image::where('description', 'LIKE', '%'.$tag.'%')
+								->orderBy('id', 'desc')
+								->paginate(5);
+		return view('image.explore', compact('images','tag'));
+	}
 }

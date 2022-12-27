@@ -70,8 +70,8 @@
                                         {{ __('My profile') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('config') }}">
-                                        {{ __('Config') }}
+                                    <a class="dropdown-item" href="{{ route('explore') }}">
+                                        {{ __('Explore') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('likes') }}">
@@ -82,6 +82,9 @@
                                         {{ __('List Users') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('config') }}">
+                                        {{ __('Config') }}
+                                    </a>
 
                                     <hr class="dropdown-divider">
 

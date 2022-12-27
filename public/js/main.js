@@ -44,8 +44,13 @@ window.addEventListener('load', function(){
 	}
 	dislike();
 
-	//Search
-	$('#formSearch').submit(function() {
-		$(this).attr('action', url+'/users/'+$('#formSearch #search').val());
+	//Search user
+	$('#formSearchUser').submit(function() {
+		$(this).attr('action', url+'/users/'+$('#formSearchUser #searchUser').val());
+	});
+
+	//Search explore
+	$('#formSearchExplore').submit(function() {
+		$(this).attr('action', url+'/explore/'+$('#formSearchExplore #searchExplore').val());
 	});
 });
