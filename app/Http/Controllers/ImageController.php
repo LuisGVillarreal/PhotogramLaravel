@@ -12,12 +12,12 @@ use App\Like;
 
 class ImageController extends Controller{
 
-    //Restrict only to authenticated users
+	//Restrict only to authenticated users
 	public function __construct(){
-        $this->middleware('auth');
-    }
+		$this->middleware('auth');
+	}
 
-    //Show the image upload form view
+	//Show the image upload form view
 	public function create(){
 		return view('image.create');
 	}
@@ -58,7 +58,11 @@ class ImageController extends Controller{
 	//Get image
 	public function getImage($filename){
 		$file = Storage::disk('images')->get($filename);
-		return new Response($file, 200);
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$mimeType = finfo_buffer($finfo, $file);
+		finfo_close($finfo);
+		return response($file, 200)->header('Content-Type', $mimeType);
+		/*return response($file, 200)->header('Content-Type', 'image/jpeg');*/
 	}
 
 	//Image detail
@@ -157,5 +161,42 @@ class ImageController extends Controller{
 								->orderBy('id', 'desc')
 								->paginate(5);
 		return view('image.explore', compact('images','tag'));
+	}
+
+	//Api tag img
+	public function getTagImg(Request $request){
+		$image_id = $request->input('image_id');
+		$image = Image::find($image_id);
+		$file_path = Storage::disk('images')->path($image->image_path);
+		$pathinfo = pathinfo($file_path);
+		$api_credentials = array(
+			'key' => env('IMAGGA_API_KEY'),
+			'secret' => env('IMAGGA_API_SECRET')
+		);
+
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, "https://api.imagga.com/v2/tags");
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+		curl_setopt($ch, CURLOPT_USERPWD, $api_credentials['key'].':'.$api_credentials['secret']);
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		$fields = [
+			'image' => new \CurlFile($file_path, 'image/jpeg', 'image.jpg')
+		];
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+		$json_response = json_decode($response);
+		$tags = $json_response->result->tags;
+		$tags = array_slice($tags, 0, 5);
+		return redirect()->route('image.edit', ['id' => $image_id])
+						 ->with(['message' => 'Successfully generated tags'])
+						 ->with(['tagsTemp' => $tags]);
 	}
 }

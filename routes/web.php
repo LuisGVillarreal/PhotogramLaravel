@@ -58,6 +58,7 @@ Route::get('/image/edit/{id}', 'ImageController@edit')->name('image.edit');
 Route::post('/image/update', 'ImageController@update')->name('image.update');
 Route::get('/explore/{search?}', 'ImageController@search')->name('explore');
 Route::get('/explore/tag/{tag}', 'ImageController@tag')->name('tag');
+Route::post('/image/api/tag', 'ImageController@getTagImg')->name('api.tag');
 
 //Comment routes
 Route::post('/comment/save', 'CommentController@save')->name('comment.save');
